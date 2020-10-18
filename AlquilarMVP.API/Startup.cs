@@ -63,7 +63,7 @@ namespace AlquilarMVP.API
             });
 
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

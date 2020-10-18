@@ -20,10 +20,16 @@ namespace AlquilarMVP.API
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    //https://stackoverflow.com/questions/59434242/asp-net-core-gives-system-net-sockets-socketexception-error-on-heroku
                     //var port = Environment.GetEnvironmentVariable("PORT");
+                    //if (port == null) { port = "80"; }
+                    //Console.WriteLine($"-aca leo  - - - -e-sfadfsaf    port: {port}");
 
+                    webBuilder.UseKestrel();
+                    webBuilder.UseUrls("http://*" + Environment.GetEnvironmentVariable("PORT"));
                     webBuilder.UseStartup<Startup>();
-                    //.UseUrls("http://*:" + port);
+                    //.UseUrls("http://*:" + port)
+                    //.UseKestrel();
                 });
     }
 }
@@ -31,3 +37,6 @@ namespace AlquilarMVP.API
 //docker tag alquilarmvpapi registry.heroku.com/seminario1alquilar/web
 //docker push registry.heroku.com/seminario1alquilar/web 
 //heroku container:release web -a seminario1alquilar
+
+
+//heroku container:push web --app seminario1alquilar & heroku container:release web --app seminario1alquilar
