@@ -20,7 +20,14 @@ namespace AlquilarMVP.API
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    //var port = Environment.GetEnvironmentVariable("PORT");
+
                     webBuilder.UseStartup<Startup>();
+                    //.UseUrls("http://*:" + port);
                 });
     }
 }
+
+//docker tag alquilarmvpapi registry.heroku.com/seminario1alquilar/web
+//docker push registry.heroku.com/seminario1alquilar/web 
+//heroku container:release web -a seminario1alquilar
