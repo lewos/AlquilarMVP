@@ -59,5 +59,11 @@ namespace AlquilarMVP.API.Models
         public List<string> Services { get; set; }
         [JsonProperty("instalaciones")]
         public List<string> Installations { get; set; }
+
+        [JsonProperty("contrato_vigente")]
+        public bool CurrentContract { get; set; }
+        [JsonProperty("contrato")]
+        public Contract Contract { get; set; }
+        
     }
 }

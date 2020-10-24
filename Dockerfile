@@ -5,8 +5,8 @@ WORKDIR /app
 
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 
-# EXPOSE 80
-# EXPOSE 443
+ #EXPOSE 80
+ #EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
@@ -22,5 +22,10 @@ RUN dotnet publish "AlquilarMVP.API.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENV ASPNETCORE_URLS http://*:$PORT
-ENTRYPOINT ["dotnet", "AlquilarMVP.API.dll"]
+#ENV ASPNETCORE_URLS http://*:$PORT
+#ENTRYPOINT ["dotnet", "AlquilarMVP.API.dll"]
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet AlquilarMVP.API.dll
+
+#CMD ["dotnet", "AlquilarMVP.API.dll"]
+
+#CMD ASPNETCORE_URLS=http://*:$PORT dotnet AlquilarMVP.dll

@@ -23,14 +23,14 @@ namespace AlquilarMVP.API.Controllers
         [HttpGet("{id:length(24)}", Name = "GetProperty")]
         public ActionResult<Property> Get(string id)
         {
-            var book = _propertyService.Get(id);
+            var property = _propertyService.Get(id);
 
-            if (book == null)
+            if (property == null)
             {
                 return NotFound();
             }
 
-            return book;
+            return property;
         }
 
         [HttpPost]

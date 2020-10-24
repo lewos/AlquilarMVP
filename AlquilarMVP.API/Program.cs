@@ -25,9 +25,12 @@ namespace AlquilarMVP.API
                     //if (port == null) { port = "80"; }
                     //Console.WriteLine($"-aca leo  - - - -e-sfadfsaf    port: {port}");
 
-                    webBuilder.UseKestrel();
-                    webBuilder.UseUrls("http://*" + Environment.GetEnvironmentVariable("PORT"));
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder
+                    .UseKestrel()
+                    //.UseUrls("http://*" + Environment.GetEnvironmentVariable("PORT"))
+
+                    .UseUrls("http://0.0.0.0:" + Environment.GetEnvironmentVariable("PORT"))
+                    .UseStartup<Startup>();
                     //.UseUrls("http://*:" + port)
                     //.UseKestrel();
                 });
@@ -40,3 +43,10 @@ namespace AlquilarMVP.API
 
 
 //heroku container:push web --app seminario1alquilar & heroku container:release web --app seminario1alquilar
+
+
+
+
+//Version del 24/10
+//con el archivo dockerfiler que esta en solutions items ejecutar:
+//    heroku container:push web --app seminario1alquilar & heroku container:release web --app seminario1alquilar

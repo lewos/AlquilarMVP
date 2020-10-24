@@ -41,6 +41,7 @@ namespace AlquilarMVP.API.IoC
                 sp.GetRequiredService<IOptions<AlquilarDatabaseSettings>>().Value);
 
             services.AddSingleton<PropertyService>();
+            services.AddSingleton<UserService>();
 
             return services;
         }
