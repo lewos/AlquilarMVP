@@ -14,16 +14,19 @@ namespace AlquilarMVP.API.Models
         [JsonProperty("prop_id")]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        [BsonElement("Adress")]
+        [BsonElement("Address")]
         [JsonProperty("direccion")]
-        public string Adress { get; set; }
+        public string Address { get; set; }
+        [JsonProperty("provincia")]
         public string Province { get; set; }
+        [JsonProperty("ciudad")]
+        public string City { get; set; }
         [JsonProperty("tipo")]
         public string UnitType { get; set; }
         [JsonProperty("operacion")]
         public string OperationType { get; set; }
         [JsonProperty("precio")]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
         public Currency Currency { get; set; }
         [JsonProperty("expensas")]
         public double Expenses { get; set; }

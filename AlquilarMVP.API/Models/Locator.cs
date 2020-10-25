@@ -11,7 +11,6 @@ namespace AlquilarMVP.API.Models
         [JsonProperty("apellido")]
         public string LastName { get; set; }
         [JsonProperty("nombre")]
-
         public string Name { get; set; }
         [JsonProperty("DNI")]
         public string Sex { get; set; }
@@ -19,5 +18,7 @@ namespace AlquilarMVP.API.Models
         public string PhoneNumber { get; set; }
         [JsonProperty("domicilio")]
         public string Address { get; set; }
+        [JsonProperty("user_mail")]
+        public string Mail { get; set; }
     }
 }

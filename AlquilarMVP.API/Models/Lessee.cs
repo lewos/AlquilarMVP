@@ -14,6 +14,7 @@ namespace AlquilarMVP.API.Models
         //        "sexo": "M",
         //        "telefono": 114543456,
         //        "cant_inquilinos": 2
+        //        "user_mail": "juan.diaz@gmail.com"
 
         [JsonProperty("apellido")]
         public string LastName { get; set; }
@@ -29,5 +30,7 @@ namespace AlquilarMVP.API.Models
         public string PhoneNumber { get; set; }
         [JsonProperty("cant_inquilinos")]
         public int NumberOfTenants { get; set; }
+        [JsonProperty("user_mail")]
+        public string Mail { get; set; }
     }
 }

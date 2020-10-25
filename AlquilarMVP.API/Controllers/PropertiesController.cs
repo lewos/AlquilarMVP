@@ -33,6 +33,34 @@ namespace AlquilarMVP.API.Controllers
             return property;
         }
 
+        [HttpGet]
+        [Route("GetPropertyByAddress/{address}")]
+        public ActionResult<List<Property>> GetPropertyByAddress(string address)
+        {
+            var properties = _propertyService.GetByAddress(address);
+
+            if (properties == null)
+            {
+                return NotFound();
+            }
+
+            return properties;
+        }
+
+        [HttpGet]
+        [Route("Find/{any}")]
+        public ActionResult<List<Property>> Find(string any)
+        {
+            var properties = _propertyService.Find(any);
+
+            if (properties == null)
+            {
+                return NotFound();
+            }
+
+            return properties;
+        }
+
         [HttpPost]
         public ActionResult<Property> Create(Property property)
         {
