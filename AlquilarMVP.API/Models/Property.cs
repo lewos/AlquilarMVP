@@ -67,6 +67,11 @@ namespace AlquilarMVP.API.Models
         public bool CurrentContract { get; set; }
         [JsonProperty("contrato")]
         public Contract Contract { get; set; }
-        
+
+        [JsonProperty("inquilino")]        
+        public string Tenant { get; set; }
+        [JsonProperty("propietario")]
+        public string Owner { get; set; }
+
     }
 }

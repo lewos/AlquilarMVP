@@ -48,6 +48,35 @@ namespace AlquilarMVP.API.Controllers
         }
 
         [HttpGet]
+        [Route("GetPropertyByOwnerId/{id}")]
+        public ActionResult<List<Property>> GetPropertyByOwnerId(string id)
+        {
+            var properties = _propertyService.GetByOwner(id);
+
+            if (properties == null)
+            {
+                return NotFound();
+            }
+
+            return properties;
+        }
+
+        [HttpGet]
+        [Route("GetPropertyByTenantId/{id}")]
+        public ActionResult<List<Property>> GetPropertyByTenantId(string id)
+        {
+            var properties = _propertyService.GetByTenant(id);
+
+            if (properties == null)
+            {
+                return NotFound();
+            }
+
+            return properties;
+        }
+
+
+        [HttpGet]
         [Route("Find/{any}")]
         public ActionResult<List<Property>> Find(string any)
         {

@@ -58,7 +58,12 @@ namespace AlquilarMVP.API.Services
             }
 
         }
-            
+
+        public List<Property> GetByTenant(string id) =>
+            _properties.Find<Property>(property => property.Tenant.ToLower().Contains(id.ToLower())).ToList();
+
+        public List<Property> GetByOwner(string id) =>
+           _properties.Find<Property>(property => property.Owner.ToLower().Contains(id.ToLower())).ToList();
 
         public Property Create(Property property)
         {
