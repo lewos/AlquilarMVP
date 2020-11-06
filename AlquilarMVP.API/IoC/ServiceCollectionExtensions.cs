@@ -42,6 +42,7 @@ namespace AlquilarMVP.API.IoC
 
             services.AddSingleton<PropertyService>();
             services.AddSingleton<UserService>();
+            services.AddSingleton<ClaimService>();
 
             return services;
         }
