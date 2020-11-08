@@ -74,6 +74,42 @@ namespace AlquilarMVP.API.Services
         public void Update(string id, Property propertyIn) =>
             _properties.ReplaceOne(property => property.Id == id, propertyIn);
 
+        public bool UpdateContract(string id, Property propertyOld, Property propertyIn) 
+        {
+            if (propertyIn.Contract != null)
+            {
+                propertyOld.Contract = propertyIn.Contract;
+                var prop = _properties.ReplaceOne(Property => Property.Id == id, propertyOld);
+                if (prop != null)
+                {
+                    return true;
+                }
+                else 
+                {
+                    return false;
+                }
+            }
+            else 
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateCurrentContract(string id, Property propertyOld, Property propertyIn)
+        {
+                propertyOld.CurrentContract = propertyIn.CurrentContract;
+                propertyOld.Tenant = propertyIn.Tenant;
+                var prop = _properties.ReplaceOne(Property => Property.Id == id, propertyOld);
+                if (prop != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+        }
+
         public void Remove(Property propertyIn) =>
             _properties.DeleteOne(property => property.Id == propertyIn.Id);
 

@@ -75,7 +75,6 @@ namespace AlquilarMVP.API.Controllers
             return properties;
         }
 
-
         [HttpGet]
         [Route("Find/{any}")]
         public ActionResult<List<Property>> Find(string any)
@@ -111,6 +110,44 @@ namespace AlquilarMVP.API.Controllers
             _propertyService.Update(id, propertyIn);
 
             return NoContent();
+        }
+
+        [HttpPut]
+        [Route("UpdateContrat/{id}")]
+        public IActionResult UpdateContrat(string id, Property propertyIn)
+        {
+            var property = _propertyService.Get(id);
+
+            if (property == null)
+            {
+                return NotFound();
+            }
+
+            var resultado = _propertyService.UpdateContract(id, property, propertyIn);
+
+            if (resultado)
+                return Ok(resultado);
+            else
+                return Conflict(resultado);
+        }
+
+        [HttpPut]
+        [Route("UpdateCurrentContrat/{id}")]
+        public IActionResult UpdateCurrentContrat(string id, Property propertyIn)
+        {
+            var property = _propertyService.Get(id);
+
+            if (property == null)
+            {
+                return NotFound();
+            }
+
+            var resultado = _propertyService.UpdateCurrentContract(id, property, propertyIn);
+
+            if (resultado)
+                return Ok(resultado);
+            else
+                return Conflict(resultado);
         }
 
         [HttpDelete("{id:length(24)}")]

@@ -74,14 +74,15 @@ namespace AlquilarMVP.API.Controllers
         [HttpPost("login")]
         public ActionResult<User> Login(User User)
         {
-            var user = _userService.Get(User.Name, User.Pass);
+            var user = _userService.Get(User.Mail, User.Pass);
 
             if (user == null)
             {
                 return Unauthorized("Combinacion de usuario y contraseña no valido");
             }
 
-            return Ok("Bienvenido");
+            user.Pass = null;
+            return Created("",user);
         }
 
 
