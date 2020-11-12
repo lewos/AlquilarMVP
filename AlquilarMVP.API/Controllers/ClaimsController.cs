@@ -21,11 +21,17 @@ namespace AlquilarMVP.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Claim>> Get() =>
-            _claimService.Get();
+        public ActionResult<List<ClaimResponse>> Get() 
+        {
+            var claims = _claimService.Get();
+
+            var claimsResponse = ConvertToClaimsResponse(claims);
+
+            return claimsResponse;
+        }
 
         [HttpGet("{id:length(24)}", Name = "GetClaim")]
-        public ActionResult<Claim> Get(string id)
+        public ActionResult<ClaimResponse> Get(string id)
         {
             var Claim = _claimService.Get(id);
 
@@ -34,13 +40,14 @@ namespace AlquilarMVP.API.Controllers
                 return NotFound();
             }
 
-            return Claim;
+            var claimResponse = ConvertToClaimResponse(Claim);
+            return claimResponse;
         }
 
 
         [HttpGet]
         [Route("GetClaimsByPropId/{id}")]
-        public ActionResult<List<Claim>> GetClaimsByPropId(string id)
+        public ActionResult<List<ClaimResponse>> GetClaimsByPropId(string id)
         {
             var claims = _claimService.GetByPropId(id);
 
@@ -49,15 +56,19 @@ namespace AlquilarMVP.API.Controllers
                 return NotFound();
             }
 
-            return claims;
+            var claimsResponse = ConvertToClaimsResponse(claims);
+
+            return claimsResponse;
         }
 
         [HttpPost]
-        public ActionResult<Claim> Create(Claim Claim)
+        public ActionResult<ClaimResponse> Create(Claim Claim)
         {
             _claimService.Create(Claim);
 
-            return CreatedAtRoute("GetClaim", new { id = Claim.Id.ToString() }, Claim);
+            var claimResponse = ConvertToClaimResponse(Claim);
+
+            return CreatedAtRoute("GetClaim", new { id = claimResponse.Id.ToString() }, claimResponse);
         }
 
         [HttpPut("{id:length(24)}")]
@@ -122,6 +133,36 @@ namespace AlquilarMVP.API.Controllers
             _claimService.Remove(Claim.Id);
 
             return NoContent();
+        }
+
+
+
+
+        private ActionResult<List<ClaimResponse>> ConvertToClaimsResponse(List<Claim> claims)
+        {
+            var claimsResponse = new List<ClaimResponse>();
+            claims.ForEach(c => {
+                claimsResponse.Add(ConvertToClaimResponse(c));
+            });
+            return claimsResponse;
+        }
+        private ClaimResponse ConvertToClaimResponse(Claim c)
+        {
+            return new ClaimResponse
+            {
+                Id = c.Id,
+                PropId = c.PropId,
+                Title = c.Title,
+                Description = c.Description,
+                State = c.State,
+                Priority = c.Priority,
+                Comments = c.Comments,
+
+                CreationDate = c.CreationDate.Date.ToString("yyyy-MM-dd"),
+                ModifiedDate = c.ModifiedDate.Date.ToString("yyyy-MM-dd"),
+
+                CreatedBy = c.CreatedBy,
+            };
         }
     }
 }

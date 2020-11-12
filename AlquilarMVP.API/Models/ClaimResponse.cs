@@ -8,14 +8,12 @@ using System.Threading.Tasks;
 
 namespace AlquilarMVP.API.Models
 {
-    public class Claim : ClaimCommon
-    {        
-        [BsonElement("CreationDate")]
+    public class ClaimResponse : ClaimCommon
+    {
         [JsonProperty("fecha_creacion")]
-        public DateTime CreationDate { get; set; }
+        public string CreationDate { get; set; }
 
-        [BsonElement("ModifiedDate")]
         [JsonProperty("fecha_modificacion")]
-        public DateTime ModifiedDate{ get; set; }       
+        public string ModifiedDate{ get; set; }
     }
 }

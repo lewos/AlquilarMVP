@@ -1,5 +1,6 @@
 ﻿using AlquilarMVP.API.Models;
 using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -29,6 +30,9 @@ namespace AlquilarMVP.API.Services
 
         public Claim Create(Claim Claim)
         {
+            var fecha = DateTime.Now.ToLocalTime();
+            Claim.CreationDate = Claim.CreationDate;
+            Claim.ModifiedDate = fecha;
             _claims.InsertOne(Claim);
             return Claim;
         }
@@ -54,6 +58,7 @@ namespace AlquilarMVP.API.Services
             if (!string.IsNullOrEmpty(ClaimIn.State))
             {
                 OldClaim.State = ClaimIn.State;
+                OldClaim.ModifiedDate = DateTime.Now.ToLocalTime();
                 _claims.ReplaceOne(Claim => Claim.Id == id, OldClaim);
             }
         }

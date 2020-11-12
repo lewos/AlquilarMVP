@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace AlquilarMVP.API.Models
 {
-    public class Property : PropertyCommon
+    public class PropertyResponse :PropertyCommon
     {       
         [JsonProperty("estado")]
-        public StatusSpanish Status { get; set; }        
+        public string Status { get; set; }        
     }
 }
