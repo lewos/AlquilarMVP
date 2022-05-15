@@ -36,9 +36,17 @@ namespace AlquilarMVP.API.Controllers
         [HttpPost]
         public ActionResult<User> Create(User User)
         {
-            _userService.Create(User);
+            var user = _userService.GetUserByMail(User.Mail);
 
-            return CreatedAtRoute("GetUser", new { id = User.Id.ToString() }, User);
+            if (user == null)
+            {
+                _userService.Create(User);
+                return CreatedAtRoute("GetUser", new { id = User.Id.ToString() }, User);
+            }
+            else 
+            {
+                return NotFound();
+            }
         }
 
         [HttpPut("{id:length(24)}")]

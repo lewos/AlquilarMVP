@@ -25,6 +25,9 @@ namespace AlquilarMVP.API.Services
         public User Get(string id) =>
             _users.Find<User>(User => User.Id == id).FirstOrDefault();
 
+        public User GetUserByMail(string mail) =>
+            _users.Find<User>(User => User.Mail == mail).FirstOrDefault();
+
         public User Get(string mail, string pass) =>
             _users.Find<User>(User => User.Mail == mail && User.Pass == pass).FirstOrDefault();
 

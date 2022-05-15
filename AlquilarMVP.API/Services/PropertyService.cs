@@ -79,6 +79,7 @@ namespace AlquilarMVP.API.Services
             if (propertyIn.Contract != null)
             {
                 propertyOld.Contract = propertyIn.Contract;
+                propertyOld.Status = StatusSpanish.Alquilado;
                 var prop = _properties.ReplaceOne(Property => Property.Id == id, propertyOld);
                 if (prop != null)
                 {

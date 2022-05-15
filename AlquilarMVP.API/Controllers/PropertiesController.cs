@@ -75,7 +75,7 @@ namespace AlquilarMVP.API.Controllers
 
         private int getClaims(Property p)
         {
-            var claims =_claimService.GetByPropId(p.Id);
+            var claims =_claimService.GetByPropId(p.Id).FindAll(c => c.State != "Solucionado");
             return claims.Count;
         }
 

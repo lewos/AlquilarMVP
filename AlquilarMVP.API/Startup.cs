@@ -30,11 +30,21 @@ namespace AlquilarMVP.API
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
-                        builder =>
-                        {
-                            builder.WithOrigins("https://localhost:3000", "http://localhost:3000")
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
+                        // builder =>
+                        // {
+                        //     builder.WithOrigins("https://localhost:3000", "http://localhost:3000",
+                        //         "http://seminario-1-alquilar.herokuapp.com:80",
+                        //         "https://seminario-1-alquilar.herokuapp.com:443",
+                        //         "http://seminario1-front.herokuapp.com:80",
+                        //         "https://seminario1-front.herokuapp.com:443")
+                        //     .AllowAnyHeader()
+                        //     .AllowAnyMethod();
+                        // });
+
+                        builder => {
+                            builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
                         });
             });
 

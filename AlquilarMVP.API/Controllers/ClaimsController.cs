@@ -25,7 +25,12 @@ namespace AlquilarMVP.API.Controllers
         {
             var claims = _claimService.Get();
 
+            claims = (from c in claims
+                                 orderby c.CreationDate descending
+                                 select c).ToList();
+
             var claimsResponse = ConvertToClaimsResponse(claims);
+
 
             return claimsResponse;
         }
@@ -56,7 +61,11 @@ namespace AlquilarMVP.API.Controllers
                 return NotFound();
             }
 
-            var claimsResponse = ConvertToClaimsResponse(claims);
+            claims = (from c in claims
+                                 orderby c.CreationDate descending
+                                select c).ToList();
+
+            List<ClaimResponse> claimsResponse = ConvertToClaimsResponse(claims);
 
             return claimsResponse;
         }
@@ -138,7 +147,7 @@ namespace AlquilarMVP.API.Controllers
 
 
 
-        private ActionResult<List<ClaimResponse>> ConvertToClaimsResponse(List<Claim> claims)
+        private List<ClaimResponse> ConvertToClaimsResponse(List<Claim> claims)
         {
             var claimsResponse = new List<ClaimResponse>();
             claims.ForEach(c => {
@@ -158,8 +167,11 @@ namespace AlquilarMVP.API.Controllers
                 Priority = c.Priority,
                 Comments = c.Comments,
 
-                CreationDate = c.CreationDate.Date.ToString("yyyy-MM-dd"),
-                ModifiedDate = c.ModifiedDate.Date.ToString("yyyy-MM-dd"),
+                CreationDate = c.CreationDate.Date.ToString("MM/dd/yyyy"),
+                ModifiedDate = c.ModifiedDate.Date.ToString("MM/dd/yyyy"),
+
+                //CreationDate = c.CreationDate.Date.ToString("yyyy-MM-dd"),
+                //ModifiedDate = c.ModifiedDate.Date.ToString("yyyy-MM-dd"),
 
                 CreatedBy = c.CreatedBy,
             };
